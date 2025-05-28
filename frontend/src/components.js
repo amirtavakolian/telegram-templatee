@@ -196,6 +196,8 @@ const mockMessages = {
 // Sidebar Component
 const Sidebar = ({ activeChat, setActiveChat, theme }) => {
   const [searchTerm, setSearchTerm] = useState('');
+  const [showMainMenu, setShowMainMenu] = useState(false);
+  const [showSearchMode, setShowSearchMode] = useState(false);
   
   const filteredChats = mockChats.filter(chat => {
     const user = mockUsers.find(u => u.id === chat.userId);
