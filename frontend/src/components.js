@@ -210,19 +210,57 @@ const Sidebar = ({ activeChat, setActiveChat, theme }) => {
   return (
     <div className={`sidebar ${theme === 'dark' ? 'sidebar-dark' : 'sidebar-light'}`}>
       {/* Header */}
-      <div className="sidebar-header">
+      <div className="sidebar-header position-relative">
         <div className="d-flex align-items-center justify-content-between p-3">
-          <button className="btn btn-link text-decoration-none p-0">
-            <i className="bi bi-list fs-4"></i>
-          </button>
+          <div className="position-relative">
+            <button 
+              className="btn btn-link text-decoration-none p-0"
+              onClick={() => setShowMainMenu(!showMainMenu)}
+            >
+              <i className="bi bi-list fs-4"></i>
+            </button>
+            
+            {/* Main Menu Dropdown */}
+            {showMainMenu && (
+              <div className="dropdown-menu show position-absolute top-100 start-0 mt-1" style={{ minWidth: '200px', zIndex: 1050 }}>
+                <h6 className="dropdown-header">Menu</h6>
+                <a className="dropdown-item" href="#" onClick={(e) => e.preventDefault()}>
+                  <i className="bi bi-person me-2"></i>My Profile
+                </a>
+                <a className="dropdown-item" href="#" onClick={(e) => e.preventDefault()}>
+                  <i className="bi bi-people me-2"></i>New Group
+                </a>
+                <a className="dropdown-item" href="#" onClick={(e) => e.preventDefault()}>
+                  <i className="bi bi-megaphone me-2"></i>New Channel
+                </a>
+                <a className="dropdown-item" href="#" onClick={(e) => e.preventDefault()}>
+                  <i className="bi bi-person-plus me-2"></i>Contacts
+                </a>
+                <div className="dropdown-divider"></div>
+                <a className="dropdown-item" href="#" onClick={(e) => e.preventDefault()}>
+                  <i className="bi bi-gear me-2"></i>Settings
+                </a>
+              </div>
+            )}
+          </div>
+          
           <h5 className="mb-0 fw-bold">Telegram</h5>
+          
           <div className="d-flex gap-2">
-            <button className="btn btn-link text-decoration-none p-0">
+            <button 
+              className="btn btn-link text-decoration-none p-0"
+              onClick={() => setShowSearchMode(!showSearchMode)}
+            >
               <i className="bi bi-search fs-5"></i>
             </button>
-            <button className="btn btn-link text-decoration-none p-0">
-              <i className="bi bi-three-dots-vertical fs-5"></i>
-            </button>
+            <div className="position-relative">
+              <button 
+                className="btn btn-link text-decoration-none p-0"
+                onClick={() => setShowMainMenu(!showMainMenu)}
+              >
+                <i className="bi bi-three-dots-vertical fs-5"></i>
+              </button>
+            </div>
           </div>
         </div>
         
