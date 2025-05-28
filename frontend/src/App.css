@@ -382,8 +382,73 @@ body {
   scrollbar-color: var(--border-color) transparent;
 }
 
+/* Dropdown Menu Styles */
+.dropdown-menu {
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  color: var(--text-primary);
+  min-width: 180px;
+}
+
+.dropdown-header {
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 8px 16px 4px;
+}
+
+.dropdown-item {
+  color: var(--text-primary);
+  padding: 8px 16px;
+  border: none;
+  background: none;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  transition: background-color 0.2s ease;
+}
+
+.dropdown-item:hover {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+.dropdown-item:focus {
+  background-color: var(--telegram-blue);
+  color: white;
+}
+
+.dropdown-item.text-danger {
+  color: #dc3545;
+}
+
+.dropdown-item.text-danger:hover {
+  background-color: rgba(220, 53, 69, 0.1);
+  color: #dc3545;
+}
+
+.dropdown-divider {
+  border-top: 1px solid var(--border-color);
+  margin: 4px 0;
+}
+
+/* Button hover effects */
+.btn-link:hover {
+  color: var(--telegram-blue) !important;
+  transition: color 0.2s ease;
+}
+
+.chat-header .btn-link:hover i,
+.sidebar-header .btn-link:hover i {
+  transform: scale(1.1);
+  transition: transform 0.2s ease;
+}
+
 /* Focus States */
-.chat-item:focus,
 .btn:focus {
   outline: 2px solid var(--telegram-blue);
   outline-offset: 2px;
