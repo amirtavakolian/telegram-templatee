@@ -198,6 +198,21 @@ const Sidebar = ({ activeChat, setActiveChat, theme }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [showMainMenu, setShowMainMenu] = useState(false);
   const [showSearchMode, setShowSearchMode] = useState(false);
+  const sidebarRef = useRef(null);
+  
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
+        setShowMainMenu(false);
+      }
+    };
+    
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
   
   const filteredChats = mockChats.filter(chat => {
     const user = mockUsers.find(u => u.id === chat.userId);
@@ -208,7 +223,7 @@ const Sidebar = ({ activeChat, setActiveChat, theme }) => {
   const regularChats = filteredChats.filter(chat => !chat.pinned);
 
   return (
-    <div className={`sidebar ${theme === 'dark' ? 'sidebar-dark' : 'sidebar-light'}`}>
+    <div className={`sidebar ${theme === 'dark' ? 'sidebar-dark' : 'sidebar-light'}`} ref={sidebarRef}>
       {/* Header */}
       <div className="sidebar-header position-relative">
         <div className="d-flex align-items-center justify-content-between p-3">
