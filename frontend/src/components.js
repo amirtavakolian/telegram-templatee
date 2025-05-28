@@ -368,6 +368,8 @@ const ChatItem = ({ chat, user, active, onClick }) => {
 
 // Chat Header Component
 const ChatHeader = ({ user, theme, toggleTheme }) => {
+  const [showChatMenu, setShowChatMenu] = useState(false);
+  
   if (!user) return null;
 
   return (
@@ -390,7 +392,7 @@ const ChatHeader = ({ user, theme, toggleTheme }) => {
           </div>
         </div>
         
-        <div className="d-flex gap-3">
+        <div className="d-flex gap-3 align-items-center">
           <button className="btn btn-link text-decoration-none p-0">
             <i className="bi bi-telephone fs-5"></i>
           </button>
@@ -400,12 +402,44 @@ const ChatHeader = ({ user, theme, toggleTheme }) => {
           <button 
             className="btn btn-link text-decoration-none p-0"
             onClick={toggleTheme}
+            title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
           >
             <i className={`bi bi-${theme === 'dark' ? 'sun' : 'moon'} fs-5`}></i>
           </button>
-          <button className="btn btn-link text-decoration-none p-0">
-            <i className="bi bi-three-dots-vertical fs-5"></i>
-          </button>
+          <div className="position-relative">
+            <button 
+              className="btn btn-link text-decoration-none p-0"
+              onClick={() => setShowChatMenu(!showChatMenu)}
+            >
+              <i className="bi bi-three-dots-vertical fs-5"></i>
+            </button>
+            
+            {/* Chat Menu Dropdown */}
+            {showChatMenu && (
+              <div className="dropdown-menu show position-absolute top-100 end-0 mt-1" style={{ minWidth: '180px', zIndex: 1050 }}>
+                <h6 className="dropdown-header">Chat Options</h6>
+                <a className="dropdown-item" href="#" onClick={(e) => e.preventDefault()}>
+                  <i className="bi bi-person-circle me-2"></i>View Profile
+                </a>
+                <a className="dropdown-item" href="#" onClick={(e) => e.preventDefault()}>
+                  <i className="bi bi-search me-2"></i>Search Messages
+                </a>
+                <a className="dropdown-item" href="#" onClick={(e) => e.preventDefault()}>
+                  <i className="bi bi-bell-slash me-2"></i>Mute Chat
+                </a>
+                <a className="dropdown-item" href="#" onClick={(e) => e.preventDefault()}>
+                  <i className="bi bi-pin me-2"></i>Pin Chat
+                </a>
+                <div className="dropdown-divider"></div>
+                <a className="dropdown-item" href="#" onClick={(e) => e.preventDefault()}>
+                  <i className="bi bi-archive me-2"></i>Archive Chat
+                </a>
+                <a className="dropdown-item text-danger" href="#" onClick={(e) => e.preventDefault()}>
+                  <i className="bi bi-trash me-2"></i>Delete Chat
+                </a>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>
