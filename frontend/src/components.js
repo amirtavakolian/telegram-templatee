@@ -384,11 +384,26 @@ const ChatItem = ({ chat, user, active, onClick }) => {
 // Chat Header Component
 const ChatHeader = ({ user, theme, toggleTheme }) => {
   const [showChatMenu, setShowChatMenu] = useState(false);
+  const chatHeaderRef = useRef(null);
+  
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (chatHeaderRef.current && !chatHeaderRef.current.contains(event.target)) {
+        setShowChatMenu(false);
+      }
+    };
+    
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
   
   if (!user) return null;
 
   return (
-    <div className={`chat-header border-bottom p-3 ${theme === 'dark' ? 'bg-dark border-secondary' : 'bg-white'}`}>
+    <div className={`chat-header border-bottom p-3 ${theme === 'dark' ? 'bg-dark border-secondary' : 'bg-white'}`} ref={chatHeaderRef}>
       <div className="d-flex align-items-center justify-content-between">
         <div className="d-flex align-items-center">
           <img 
